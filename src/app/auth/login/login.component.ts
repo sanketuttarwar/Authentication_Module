@@ -47,11 +47,6 @@ export class LoginComponent implements OnInit {
             this.errorMessage = 'Error';
           }
           this.loginLoading = false;
-
-          // localStorage.setItem('token', "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6WyI2IiwiYmxvY2tjaGFpbmJlcHJvamVjdEBnbWFpbC5jb20iXSwibmJmIjoxNTk2MjEzMDE5LCJleHAiOjE1OTYyOTk0MTksImlhdCI6MTU5NjIxMzAxOX0.bsjvsu9MqltY8XpzkQZ5Tja2YgcGL-BqVVw7y4SiWF8");
-          // this.loginLoading = false;
-          // this.loginForm.reset();
-          // this.router.navigate(['/dashboard']);
         },
         () => {
           this.loginLoading = false;
