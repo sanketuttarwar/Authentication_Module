@@ -104,7 +104,7 @@ export class RegisterComponent implements OnInit {
           } else {
             this.errorMessage = 'Error';
           }
-          // this.alertify.error(error);
+
           this.registerLoading = false;
         },
         () => {
