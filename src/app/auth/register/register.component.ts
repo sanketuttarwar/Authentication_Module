@@ -78,8 +78,6 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-    console.log(this.signupForm);
-
     if (this.signupForm.valid) {
       this.registerLoading = true;
 
@@ -94,8 +92,6 @@ export class RegisterComponent implements OnInit {
       this.signupModel.password = this.signupForm.get(
         'passwords.signupPassword'
       ).value;
-
-      console.log(this.signupModel);
 
       this.authService.register(this.signupModel).subscribe(
         (next) => {
