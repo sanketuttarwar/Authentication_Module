@@ -1,0 +1,76 @@
+<!-- <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+<div class="container">
+  <a href="#" class="navbar-brand">Brand</a>
+  <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarCollapse">
+      <div class="navbar-nav">
+          <a href="#" class="nav-item nav-link active">Home</a>
+          <a href="#" class="nav-item nav-link">Profile</a>
+          <a href="#" class="nav-item nav-link">Messages</a>
+          <a href="#" class="nav-item nav-link disabled" tabindex="-1">Reports</a>
+      </div>
+      <div class="navbar-nav ml-auto">
+          <a href="#" class="nav-item nav-link">Login</a>
+      </div>
+  </div>
+  <div class="dropdown" dropdown>
+    <a class="dropdown-toggle text-light" dropdownToggle>
+      Welcome
+    </a>
+
+    <div class="dropdown-menu mt-3" *dropdownMenu>
+      <a class="dropdown-item" href="#">
+        <i class="fa fa-user"></i> Edit Profile</a>
+      <div class="dropdown-divider"></div>
+      <a class="dropdown-item" (click)="logout()">
+        <i class="fa fa-sign-out"></i> Logout</a>
+    </div>
+  </div>
+</div>
+</nav> -->
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sanket">
+  <div class="container">
+    <a [routerLink]="['/']">
+      <img src="assets/logo.png" height="28" alt="CoolBrand" />
+    </a>
+
+    <button class="navbar-toggler" type="button" (click)="toggleNavbar()">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" [ngClass]="{ show: navbarOpen }">
+      <ul *ngIf="loggedIn()" class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Dashboard</a>
+        </li>
+        <!-- **********can use more nav-link buttons here********** -->
+        <!-- <li class="nav-item">
+          <a class="nav-link" href="#">Request</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Other</a>
+        </li> -->
+      </ul>
+
+      <div *ngIf="loggedIn()" class="dropdown" dropdown>
+        <a class="dropdown-toggle text-light" dropdownToggle>
+          Welcome
+        </a>
+
+        <div class="dropdown-menu mt-2" *dropdownMenu>
+          <a class="dropdown-item" [routerLink]="['/profile']">
+            <i class="fa fa-user"></i>Profile</a
+          >
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" (click)="logout()">
+            <i class="fa fa-sign-out"></i> Logout</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,85 @@
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <div class="col-12 col-sm-8 col-md-8 col-lg-6 col-xl-6">
+      <form class="form-container" [formGroup]="loginForm" (ngSubmit)="login()">
+        <h4 class="blockquote text-center"><u>LOGIN</u></h4>
+        <div class="form-group">
+          <label for="loginEmail">Email</label>
+          <input
+            type="email"
+            formControlName="loginEmail"
+            class="form-control"
+            id="loginEmail"
+            [ngClass]="{
+              'is-invalid':
+                loginForm.get('loginEmail').errors != null &&
+                loginForm.get('loginEmail').touched == true
+            }"
+          />
+          <div
+            *ngIf="
+              loginForm.get('loginEmail').errors != null &&
+              loginForm.get('loginEmail').touched == true
+            "
+            class="invalid-feedback"
+          >
+            Please provide a valid email.
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="loginPassword">Password</label>
+          <input
+            type="password"
+            formControlName="loginPassword"
+            class="form-control"
+            id="loginPassword"
+            [ngClass]="{
+              'is-invalid':
+                loginForm.get('loginPassword').errors != null &&
+                loginForm.get('loginPassword').touched == true
+            }"
+          />
+          <div
+            *ngIf="
+              loginForm.get('loginPassword').errors != null &&
+              loginForm.get('loginPassword').touched == true
+            "
+            class="invalid-feedback"
+          >
+            Please provide a valid password.
+          </div>
+        </div>
+        <div
+          *ngIf="errorMessage.length != 0"
+          class="alert alert-danger"
+          role="alert"
+        >
+          {{ errorMessage }}
+        </div>
+        <button
+          type="submit"
+          class="btn btn-primary mr-1 a-ngC"
+          [disabled]="loginLoading"
+        >
+          <span
+            *ngIf="loginLoading"
+            class="spinner-border spinner-border-sm"
+            role="status"
+            aria-hidden="true"
+          ></span>
+          Login
+        </button>
+        <!-- <a href="#" (click)="toggleForgetPassword()">Forgot password?</a> -->
+        <!-- <div class="dropdown-divider"></div> -->
+        <button
+          type="button"
+          class="btn btn-danger"
+          [disabled]="loginLoading"
+          [routerLink]="['/register']"
+        >
+          Register
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
