@@ -78,8 +78,6 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-    console.log(this.signupForm);
-
     if (this.signupForm.valid) {
       this.registerLoading = true;
 
@@ -95,11 +93,8 @@ export class RegisterComponent implements OnInit {
         'passwords.signupPassword'
       ).value;
 
-      console.log(this.signupModel);
-
       this.authService.register(this.signupModel).subscribe(
         (next) => {
-          // this.alertify.success('registration successful');
         },
         (error) => {
           if (error.status == 400) {
@@ -109,7 +104,7 @@ export class RegisterComponent implements OnInit {
           } else {
             this.errorMessage = 'Error';
           }
-          // this.alertify.error(error);
+
           this.registerLoading = false;
         },
         () => {
