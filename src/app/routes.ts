@@ -8,9 +8,6 @@ import { UserDetailsResolver } from './_resolvers/user-details.resolver';
 
 
 export const appRoutes: Routes = [
-    // {path: 'home', component: AuthComponent},
-    // {path: 'profile', component: ProfileComponent},
-    // {path: 'dashboard', component: DashboardComponent},
     { path: '', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
     {
