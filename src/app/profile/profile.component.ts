@@ -20,7 +20,6 @@ export class ProfileComponent implements OnInit {
     this.route.data.subscribe((data) => {
       this.user = data['user'];
     });
-    //this.loadUserDetails();
   }
 
   loadUserDetails() {
