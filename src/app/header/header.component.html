@@ -47,12 +47,18 @@
       <span class="example-spacer"></span>
       <div *ngIf="loggedIn()">
         <button
-          mat-icon-button
+          mat-flat-button
           class="example-icon favorite-icon"
           aria-label="Example icon-button with heart icon"
           [matMenuTriggerFor]="menu"
+          color="primary"
         >
-          <mat-icon>more_vert</mat-icon>
+          <img
+            src="../../assets/user_logo.png"
+            alt="user-profile"
+            class="profile-img"
+          />
+          User Name
         </button>
         <mat-menu #menu="matMenu">
           <button mat-menu-item [routerLink]="['/profile']">

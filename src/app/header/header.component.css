@@ -11,8 +11,14 @@ mat-sidenav {
   min-width: 250px;
 }
 
-mat-toolbar{
+mat-toolbar {
   display: flex;
   justify-content: space-between;
 }
 
+.profile-img {
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  margin: 5px;
+}
