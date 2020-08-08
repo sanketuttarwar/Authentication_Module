@@ -1,0 +1,95 @@
+<!-- <div class="col-md-7">
+        <router-outlet></router-outlet>
+    </div> -->
+<div class="row">
+  <div class="col-md-3"></div>
+  <div class="col-xs-12 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 align-self-center">
+    <app-cards (cardSelected)="filterFromCard($event)"></app-cards>
+    <hr />
+    <div class="sr-table mat-elevation-z8">
+      <mat-toolbar color="primary" class="table-header">
+        Service Requests
+        <div>
+          <button
+            mat-button
+            color="accent"
+            type="button"
+            (click)="onClearFilter()"
+            style="margin: 0 5px;"
+            disableRipple
+          >
+            Clear Filter
+          </button>
+          <button
+            mat-raised-button
+            color="accent"
+            type="button"
+            [routerLink]="['/serviceform']"
+          >
+            <mat-icon>add</mat-icon> New Request
+          </button>
+        </div>
+      </mat-toolbar>
+      <mat-progress-bar *ngIf="loading" mode="indeterminate" color = "accent"></mat-progress-bar>
+      
+      <mat-form-field style="padding: 10px;" *ngIf = "!loading">
+        <input
+          matInput
+          placeholder="Filter"
+          (keyup)="onFilter($event.target.value)"
+        />
+      </mat-form-field>
+      <table
+        mat-table
+        [dataSource]="dataSource"
+        multiTemplateDataRows
+        *ngIf="!loading"
+      >
+        <ng-container
+          matColumnDef="{{ column }}"
+          *ngFor="let column of columnsToDisplay"
+        >
+          <th mat-header-cell *matHeaderCellDef>{{ column }}</th>
+          <td mat-cell *matCellDef="let element">{{ element[column] }}</td>
+        </ng-container>
+
+        <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+        <ng-container matColumnDef="expandedDetail">
+          <td
+            mat-cell
+            *matCellDef="let element"
+            [attr.colspan]="columnsToDisplay.length"
+          >
+            <div
+              class="example-element-detail"
+              [@detailExpand]="
+                element == expandedElement ? 'expanded' : 'collapsed'
+              "
+            >
+              <div class="example-element-description">
+                {{ element.summary }}
+              </div>
+            </div>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+        <tr
+          mat-row
+          *matRowDef="let element; columns: columnsToDisplay"
+          class="example-element-row"
+          [class.example-expanded-row]="expandedElement === element"
+          (click)="
+            expandedElement = expandedElement === element ? null : element
+          "
+        ></tr>
+        <tr
+          mat-row
+          *matRowDef="let row; columns: ['expandedDetail']"
+          class="example-detail-row"
+        ></tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]"></mat-paginator>
+    </div>
+  </div>
+</div>

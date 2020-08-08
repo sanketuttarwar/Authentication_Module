@@ -1,0 +1,39 @@
+
+<div class="cards-container">
+  <mat-card
+    class="example-card"
+    id="completed"
+    (click)="onSelect('completed')"
+    matRipple
+  >
+    <mat-card-content>
+      <h1 class="mat-display-3">{{ completed }}</h1>
+    </mat-card-content>
+    <mat-card-title>Completed Requests </mat-card-title>
+  </mat-card>
+
+  <mat-card
+    class="example-card"
+    id="pending"
+    (click)="onSelect('pending')"
+    matRipple
+  >
+    <mat-card-content>
+      <h1 class="mat-display-3">{{ pending }}</h1>
+    </mat-card-content>
+    <mat-card-title>Pending Requests</mat-card-title>
+  </mat-card>
+
+  <mat-card
+    class="example-card"
+    id="closed"
+    (click)="onSelect('closed')"
+    matRipple
+  >
+    <mat-card-content>
+      <h1 class="mat-display-3">{{ closed }}</h1>
+    </mat-card-content>
+    <mat-card-title>Closed Requests</mat-card-title>
+  </mat-card>
+
+</div>

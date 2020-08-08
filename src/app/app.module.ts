@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { appRoutes } from './routes';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './material.module';
 
 //ngx bootstrap
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
@@ -20,35 +21,43 @@ import { RequestInterceptorService } from './_interceptors/request.interceptor.s
 //components
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { DashboardpageComponent } from './dashboard/dashboardpage.component';
 import { ProfileComponent } from './profile/profile.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { LoginComponent } from './auth/login/login.component';
+import { CardsComponent } from './dashboard/cards/cards.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavComponent,
-    DashboardComponent,
+    DashboardpageComponent,
     ProfileComponent,
     RegisterComponent,
     LoginComponent,
+    CardsComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     ReactiveFormsModule,
     BsDropdownModule.forRoot(),
+    MaterialModule,
     ModalModule.forRoot(),
     BrowserAnimationsModule,
     RouterModule.forRoot(appRoutes),
   ],
-  providers: [AuthService, UserService, AuthGuard, UserDetailsResolver, {
-    provide: HTTP_INTERCEPTORS,
-    useClass: RequestInterceptorService,
-    multi: true
-  }
-],
+  providers: [
+    AuthService,
+    UserService,
+    AuthGuard,
+    UserDetailsResolver,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: RequestInterceptorService,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
