@@ -1,0 +1,125 @@
+<div class="container">
+  <div *ngIf="!requestCreated">
+    <div class="page-header">
+      <h2>Create service request</h2>
+    </div>
+    <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+      <!-- department -->
+      <div class="row">
+        <div class="col-sm-12">
+          <label for="dept">Department</label
+          ><span style="color: red;" class="required">*</span>
+          <select
+            class="form-control"
+            id="dept"
+            name="department"
+            ngModel
+            required
+            [(ngModel)]="depart"
+            (change)="onSelectDept()"
+            #dept
+          >
+            <option *ngFor="let item of departmentsArray" [ngValue]="item">{{
+              item.name
+            }}</option>
+          </select>
+        </div>
+      </div>
+      <br />
+
+      <div class="row">
+        <div class="col-sm-12">
+          <label for="cat"> Request Category</label
+          ><span style="color: red;" class="required">*</span>
+          <!-- <select class="form-control">
+            <option selected disabled>Choose department </option>
+          </select> -->
+
+          <select
+            class="form-control"
+            id="cat"
+            name="category"
+            ngModel
+            [(ngModel)]="cat"
+            (change)="onSelectCategory()"
+            required
+          >
+            <option disabled selected> Choose one </option>
+            <option *ngFor="let item of categories" [ngValue]="item"
+              >{{ item.name }}
+            </option>
+          </select>
+        </div>
+      </div>
+      <br />
+
+      <div class="row">
+        <div class="col-sm-12">
+          <label for="subCategory">Request Sub-category</label
+          ><span style="color: red;" class="required">*</span
+          ><select
+            name="subCategory"
+            id="subCategory"
+            class="form-control"
+            ngModel
+            (input)="onSelectSubCategory()"
+            [(ngModel)]="subCat"
+          >
+            <option *ngFor="let item of subcategories" [ngValue]="item"
+              >{{ item.name }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <br />
+      <div class="row">
+        <div class="col-sm-12">
+          <label for="title">Title</label>
+          <span class="required" style="color: red;">*</span>
+          <input
+            id="title"
+            name="title"
+            class="form-control"
+            type="text"
+            ngModel
+            required
+          />
+        </div>
+      </div>
+      <br />
+
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label> Summary </label
+            ><span style="color: red;" class="required">*</span>
+            <textarea
+              class="form-control"
+              id="summary"
+              name="summary"
+              ngModel
+              required
+              maxlength="250"
+            >
+            </textarea>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="col-sm-4">
+          <button type="submit" class="btn btn-success" [disabled]="!f.valid">
+            Save
+          </button>
+          |
+          <button class="btn btn-default"><a href="#"> Cancel </a></button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div *ngIf="requestCreated" class="alert alert-success" style="margin: 10px;">
+    Request created successfully.
+  </div>
+</div>
