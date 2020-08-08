@@ -23,7 +23,7 @@
       </ul>
 
       <div *ngIf="loggedIn()" class="dropdown" dropdown>
-        <button dropdownToggle class="btn btn-secondary dropdown-toggle btn-circle btn-circle-sm m-1" aria-controls="dropdown-basic"><img src="assets/user_logo.png" alt="User" />{{authService.decodedToken?.unique_name | titlecase}}</button>
+        <button dropdownToggle class="btn btn-secondary dropdown-toggle btn-circle btn-circle-sm m-1" aria-controls="dropdown-basic"><img src="assets/user_logo.png" alt="User" />{{ ' '+authService.getDecodedToken()?.unique_name[1] | titlecase}}</button>
 
         <div class="dropdown-menu mt-2" *dropdownMenu>
           <a class="dropdown-item" [routerLink]="['/profile']">

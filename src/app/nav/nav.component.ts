@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../_services/auth.service'
+import { AuthService } from '../_services/auth.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
   selector: 'app-nav',
@@ -8,11 +9,11 @@ import { AuthService } from '../_services/auth.service'
   styleUrls: ['./nav.component.css'],
 })
 export class NavComponent implements OnInit {
+  navbarOpen = false;
   constructor(private router: Router, public authService: AuthService) {}
 
-  ngOnInit(): void {}
-
-  navbarOpen = false;
+  ngOnInit() {
+  }
 
   toggleNavbar() {
     this.navbarOpen = !this.navbarOpen;
