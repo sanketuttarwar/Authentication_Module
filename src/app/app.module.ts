@@ -17,6 +17,7 @@ import { UserService } from './_services/user.service';
 import { AuthGuard } from './_guards/auth.guard';
 import { UserDetailsResolver } from './_resolvers/user-details.resolver';
 import { RequestInterceptorService } from './_interceptors/request.interceptor.service';
+import { ServiceRequestResolver } from './_resolvers/service-request.resolver';
 
 //components
 import { AppComponent } from './app.component';
@@ -27,7 +28,7 @@ import { RegisterComponent } from './auth/register/register.component';
 import { LoginComponent } from './auth/login/login.component';
 import { CardsComponent } from './dashboard/cards/cards.component';
 import { DetailsComponent } from './dashboard/serviceform/details.component';
-import { ServiceRequestResolver } from './_resolvers/service-request.resolver';
+import { HeaderComponent } from "../app/header/header.component";
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { ServiceRequestResolver } from './_resolvers/service-request.resolver';
     LoginComponent,
     CardsComponent,
     DetailsComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,

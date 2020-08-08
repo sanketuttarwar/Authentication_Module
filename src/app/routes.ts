@@ -13,8 +13,8 @@ export const appRoutes: Routes = [
   { path: 'register', component: RegisterComponent },
   {
     path: '',
-    // runGuardsAndResolvers: 'always',
-    // canActivate: [AuthGuard],
+    runGuardsAndResolvers: 'always',
+    canActivate: [AuthGuard],
     children: [
       {
         path: 'profile',
