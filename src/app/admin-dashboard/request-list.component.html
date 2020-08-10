@@ -1,0 +1,195 @@
+
+<div class="container mt-4">
+  <div class="row">
+    <div class="col mb-4">
+
+       <div class="row mb-2">
+         <div class="col-md-3 text-center">
+           <p class="totle shadow p-3 mb-5 rounded" (click)="onClickTotle()"><strong>Total Requests: </strong>{{totlecount}}</p>
+        </div>
+        <div class="col-md-3 text-center" >
+          <p class="totle open shadow p-3 mb-5 rounded" (click)="onClickOpen()"><strong>Open: </strong>{{open.length}}</p>
+        </div>
+        <div class="col-md-3 text-center">
+          <p class="totle inprogress shadow p-3 mb-5 rounded" (click)="onClickInProgress()"><strong>In Progress: </strong>{{inProgress.length}}</p>
+       </div>
+       <div class="col-md-3 text-center">
+        <p class="totle closed shadow p-3 mb-5 rounded" (click)="onClickClosed()"><strong>Closed: </strong>{{closed.length}}</p>
+     </div>
+      </div>
+
+        <div class="btn-group">
+          <button class="btn btn-dark" type="button" (click)="onReload()"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-house-door-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6.5 10.995V14.5a.5.5 0 0 1-.5.5H2a.5.5 0 0 1-.5-.5v-7a.5.5 0 0 1 .146-.354l6-6a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 .146.354v7a.5.5 0 0 1-.5.5h-4a.5.5 0 0 1-.5-.5V11c0-.25-.25-.5-.5-.5H7c-.25 0-.5.25-.5.495z"/>
+            <path fill-rule="evenodd" d="M13 2.5V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
+          </svg></button>
+          <button class="btn btn-dark" type="button" (click)="selectFilter()"> Filter <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-filter-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+            <path fill-rule="evenodd" d="M7 11.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5z"/>
+          </svg></button>
+          <button class="btn btn-dark" type="button" (click)="onSwitchView()">Switch View</button>
+        </div>
+    </div>
+  </div>
+
+  <div>
+    <div *ngIf="isFilterSelected">
+      <div class="col-xs-12 col-md-12 shadow p-3 mb-5 bg-light rounded">
+        <div class="m-2">
+            <h1 class="text-info">Select Filters</h1>
+          <form #filterForm="ngForm" (ngSubmit)="onFilterSubmit(filterForm)">
+             <div class="row">
+              <div class="col-xs-12 col-md-2 mb-2">
+                <div class="form-group">
+                  <label for="department">Department <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-down-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+                  </svg></label>
+                  <select
+                    id="department"
+                    class="form-control form-control-sm"
+                    ngModel
+                    name="department">
+                    <option value="IT">IT</option>
+                    <option value="Finance">Finance</option>
+                    <option value="Admin">Admin</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-xs-12 col-md-2 mb-2">
+                <div class="form-group">
+                  <label for="category">Category <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-down-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+                  </svg></label>
+                  <select
+                    id="category"
+                    class="form-control form-control-sm"
+                    ngModel
+                    name="category">
+                    <option value="Hardware">Hardware</option>
+                    <option value="Software">Software</option>
+                    <option value="Travel booking">Travel Booking</option>
+                    <option value="Salary Issue">Salary Issue</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-xs-12 col-md-2 mb-2">
+                <div class="form-group">
+                  <label for="subCategory">Sub Category <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-down-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+                  </svg></label>
+                  <select
+                    id="subCategory"
+                    class="form-control form-control-sm"
+                    ngModel
+                    name="subCategory">
+                    <option value="Laptop">Laptop</option>
+                    <option value="Mouse">Mouse</option>
+                    <option value="Keyboard">Keyboard</option>
+                    <option value="International Travel Ticket">International Travel Ticket</option>
+                    <option value="Salary Calculation">Salary Calculation</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-xs-12 col-md-2 mb-2">
+                <div class="form-group">
+                  <label for="Status">Status <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-down-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+                  </svg></label>
+                  <select
+                    id="Status"
+                    class="form-control form-control-sm"
+                    ngModel
+                    name="status">
+                    <option value="Open      ">Open</option>
+                    <option value="InProgress">InProgress</option>
+                    <option value="Close     ">Close</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-xs-12 col-md-2 mb-2">
+                <div class="form-group">
+                  <label for="Type">Type <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-down-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+                  </svg></label>
+                  <select
+                    id="Type"
+                    class="form-control form-control-sm"
+                    ngModel
+                    name="type">
+                    <option value="Issue">Issue</option>
+                    <option value="Service">Service</option>
+                  </select>
+                </div>
+              </div>
+             </div>
+             <hr>
+              <div class="form-group">
+                 <button type="submit" class="btn btn-success mr-4">Apply</button>
+                 <button type="button" class="btn btn-danger mr-4" (click)="onCancelFilter()">Cancel</button>
+              </div>
+          </form>
+        </div>
+      </div>
+      <hr>
+    </div>
+  </div>
+
+ <div>
+    <div *ngIf="view === 'Table'">
+      <table class="table shadow p-3 mb-5 bg-white rounded">
+        <thead class="thead-dark bg-dark text-light">
+          <tr>
+            <th scope="col">#ID</th>
+            <th scope="col">Title</th>
+            <th scope="col">Department</th>
+            <th scope="col">Category</th>
+            <th scope="col">Sub Category</th>
+            <th scope="col">Type</th>
+            <th scope="col">Status</th>
+            <th scope="col">Summary</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let request of requestList" [style.backgroundColor]="request.requestStatus === 'Close     ' ? 'mistyrose': 'transperant'"
+            [style.backgroundColor]="request.requestStatus === 'InProgress' ? '#10f69624': 'transperant'">
+              <th scope="row"><button type="button" class="btn btn-outline-success" (click)="onRequestSelect(request)">{{request.requestId}}</button></th>
+              <td>{{request.title}}</td>
+              <td>{{request.requestDepartment}}</td>
+              <td>{{request.requestCategory}}</td>
+              <td>{{request.requestSubCategory}}</td>
+              <td>{{request.requestType}}</td>
+              <td>{{request.requestStatus}}</td>
+              <td style="cursor: pointer;">
+                  {{request.requestSummary | summaryShorten}}
+              </td>
+            </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="row" *ngIf="view === 'Card'">
+      <div class="col-xs-12 col-md-3" *ngFor="let request of requestList">
+        <div  [style.backgroundColor]="request.requestStatus === 'Close     ' ? 'mistyrose': 'transperant'"
+        [style.backgroundColor]="request.requestStatus === 'InProgress' ? '#10f69624': 'transperant'">
+          <div class="shadow p-3 mb-5 rounded" style="max-width: 25rem; height: 25rem; cursor: pointer;" (click)="onRequestSelect(request)" >
+            <div class="card-header text-light" style="background-color: black;"><strong class="text-info">Department: </strong>{{request.requestDepartment}}</div>
+            <div class="card-body">
+              <h6 class="card-title"><strong class="text-info">Request ID: </strong>{{request.requestId}}</h6>
+              <hr>
+              <p class="card-text"><strong class="text-info">Category: </strong>{{request.requestCategory}}</p>
+              <p class="card-text"><strong class="text-info">Sub Category: </strong>{{request.requestSubCategory}}</p>
+              <p class="card-text"><strong class="text-info">Type: </strong>{{request.requestType}}</p>
+              <p class="card-text"><strong class="text-info">Summary: </strong>{{request.requestSummary}}</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
