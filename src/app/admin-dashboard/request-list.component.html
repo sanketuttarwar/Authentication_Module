@@ -173,14 +173,14 @@
         <div  [style.backgroundColor]="request.requestStatus === 'Close     ' ? 'mistyrose': 'transperant'"
         [style.backgroundColor]="request.requestStatus === 'InProgress' ? '#10f69624': 'transperant'">
           <div class="shadow p-3 mb-5 rounded" style="max-width: 25rem; height: 25rem; cursor: pointer;" (click)="onRequestSelect(request)" >
-            <div class="card-header text-light" style="background-color: black;"><strong class="text-info">Department: </strong>{{request.requestDepartment}}</div>
+            <div class="card-header text-light" style="background-color: black;"><strong style="color: rgb(72, 255, 0);">Department: </strong>{{request.requestDepartment}}</div>
             <div class="card-body">
-              <h6 class="card-title"><strong class="text-info">Request ID: </strong>{{request.requestId}}</h6>
+              <h3 class="card-title"><strong class="text-primary">Request ID: </strong>{{request.requestId}}</h3>
               <hr>
-              <p class="card-text"><strong class="text-info">Category: </strong>{{request.requestCategory}}</p>
-              <p class="card-text"><strong class="text-info">Sub Category: </strong>{{request.requestSubCategory}}</p>
-              <p class="card-text"><strong class="text-info">Type: </strong>{{request.requestType}}</p>
-              <p class="card-text"><strong class="text-info">Summary: </strong>{{request.requestSummary}}</p>
+              <p class="card-text"><strong class="text-primary">Category: </strong>{{request.requestCategory}}</p>
+              <p class="card-text"><strong class="text-primary">Sub Category: </strong>{{request.requestSubCategory}}</p>
+              <p class="card-text"><strong class="text-primary">Type: </strong>{{request.requestType}}</p>
+              <p class="card-text"><strong class="text-primary">Summary: </strong>{{request.requestSummary}}</p>
             </div>
           </div>
         </div>

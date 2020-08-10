@@ -21,7 +21,7 @@ export class RequestDetailService{
 
 
   getEmployees(): Observable<EmployeeData []>{
-    return this.http.get<EmployeeData []>(this.baseUrl+'/employee/getallemployees').pipe(
+    return this.http.get<EmployeeData []>(this.baseUrl+'assignemployee/getallemployees').pipe(
       map(Response => {
         const emp: EmployeeData [] = [];
         for(const key in Response){
@@ -32,7 +32,7 @@ export class RequestDetailService{
  }
 
   getRequest(id: string): Observable<RequestDataStore>{
-    return this.http.get<RequestDataStore>(this.baseUrl+"request/SingleRequest/"+id).pipe(
+    return this.http.get<RequestDataStore>(this.baseUrl+"assignrequest/SingleRequest/"+id).pipe(
       map(Response => {
         const req: RequestDataStore = Response;
         console.log(req);

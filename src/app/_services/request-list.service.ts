@@ -22,7 +22,7 @@ export class RequestListService{
    constructor(private http: HttpClient){}
 
    getRequests(): Observable<RequestDataStore[]>{
-    return this.http.get<RequestDataStore[]>(this.baseUrl+'request/getallrequests').pipe(
+    return this.http.get<RequestDataStore[]>(this.baseUrl+'assignrequest/getallrequests').pipe(
       map((response) => {
         const req: RequestDataStore[] = [];
         for(const key in response){
