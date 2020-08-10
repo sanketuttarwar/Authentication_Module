@@ -3,6 +3,7 @@ import {RequestDataStore} from '../_models/data.model';
 import { Subject, Observable } from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {map} from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 
 
 @Injectable({
@@ -16,12 +17,12 @@ export class RequestListService{
   requestsChanged = new Subject<RequestDataStore []>();
   requests: RequestDataStore [];
   requestList: RequestDataStore [];
-  rootURL = 'https://localhost:44355/api/request';
+  baseUrl = environment.apiUrl;
 
    constructor(private http: HttpClient){}
 
    getRequests(): Observable<RequestDataStore[]>{
-    return this.http.get<RequestDataStore[]>(this.rootURL+'/getallrequests').pipe(
+    return this.http.get<RequestDataStore[]>(this.baseUrl+'request/getallrequests').pipe(
       map((response) => {
         const req: RequestDataStore[] = [];
         for(const key in response){
