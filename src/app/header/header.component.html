@@ -1,0 +1,75 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" [mode]="'over'">
+    <mat-toolbar color="primary">Menu</mat-toolbar>
+    <mat-nav-list>
+      <mat-list-item>
+        <mat-icon matListIcon>account_circle</mat-icon>
+        <a
+          matLine
+          [routerLink]="['/dashboard']"
+          routerLinkActive="router-link-active"
+          (click)="drawer.close()"
+          >Dashboard</a
+        >
+      </mat-list-item>
+      <mat-list-item>
+        <mat-icon matListIcon>assignment</mat-icon>
+        <a
+          matLine
+          [routerLink]="['/create-request']"
+          routerLinkActive="router-link-active"
+          (click)="drawer.close()"
+          >Service Requests</a
+        >
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <!-- Toolbar Section -->
+    <mat-toolbar color="primary">
+      <div>
+        <button
+          mat-icon-button
+          class="example-icon"
+          aria-label="Example icon-button with menu icon"
+          (click)="drawer.toggle()"
+        >
+          <mat-icon>menu</mat-icon>
+        </button>
+        <span>
+          <img
+            src="../../assets/se2_logo.png"
+            alt="SE2"
+            style="height: 50px;"
+          />
+        </span>
+      </div>
+      <span class="example-spacer"></span>
+      <div *ngIf="loggedIn()">
+        <button
+          mat-flat-button
+          class="example-icon favorite-icon"
+          aria-label="Example icon-button with heart icon"
+          [matMenuTriggerFor]="menu"
+          color="primary"
+        >
+          <img
+            src="../../assets/user_logo.png"
+            alt="user-profile"
+            class="profile-img"
+          />
+          User Name
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item [routerLink]="['/profile']">
+            <mat-icon>person_outline</mat-icon> Profile
+          </button>
+          <button mat-menu-item (click)="logout()">
+            <mat-icon>lock</mat-icon> Logout
+          </button>
+        </mat-menu>
+      </div>
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

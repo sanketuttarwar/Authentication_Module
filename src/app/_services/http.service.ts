@@ -4,25 +4,27 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Request } from '../_models/request.model';
 import { Subscription } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class HttpService implements OnDestroy {
   constructor(private http: HttpClient) {}
   postSubscription: Subscription;
 
+  baseUrl = environment.apiUrl;
   ngOnDestroy(): void {
     this.postSubscription.unsubscribe();
   }
   createAndStoreRequest(formData: Request) {
     this.postSubscription = this.http
-      .post('http://localhost:5000/api/requests', formData)
+      .post(this.baseUrl + '/requests', formData)
       .subscribe((data) => {
         console.log(data);
       });
   }
 
   fetchFromAPI() {
-    return this.http.get('http://localhost:5000/api/requests').pipe(
+    return this.http.get(this.baseUrl + '/requests').pipe(
       map((responseData) => {
         const postArray = [];
         for (const key in responseData) {
@@ -42,11 +44,11 @@ export class HttpService implements OnDestroy {
   }
 
   fetchRequestById(id: number) {
-    return this.http.get('http://localhost:5000/api/requests/' + id);
+    return this.http.get(this.baseUrl + '/requests/' + id);
   }
 
   getDepartments() {
-    return this.http.get('http://localhost:5000/api/departments').pipe(
+    return this.http.get(this.baseUrl + '/departments').pipe(
       map((resposeData) => {
         const departmentsArray = [];
         for (const key in resposeData) {
@@ -60,7 +62,7 @@ export class HttpService implements OnDestroy {
   }
 
   getCategories() {
-    return this.http.get('http://localhost:5000/api/categories').pipe(
+    return this.http.get(this.baseUrl + '/categories').pipe(
       map((responseData) => {
         const categoriesArray = [];
         for (const key in responseData) {
