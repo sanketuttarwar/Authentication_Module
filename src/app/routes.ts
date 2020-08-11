@@ -3,7 +3,7 @@ import { DashboardpageComponent } from './dashboard/dashboardpage.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { AdminGuard } from './_guards/admin.guard';
-import { AssociateGuard } from './_guards/associate.guard';
+import { UserGuard } from './_guards/user.guard';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { UserDetailsResolver } from './_resolvers/user-details.resolver';
@@ -20,7 +20,7 @@ export const appRoutes: Routes = [
   {
     path: '',
     runGuardsAndResolvers: 'always',
-    canActivate: [AssociateGuard],
+    canActivate: [UserGuard],
     children: [
       {
         path: 'dashboard',

@@ -66,7 +66,7 @@
           color="primary"
         >
         <mat-icon>person_outline</mat-icon>
-          User Name
+        {{' '+authService.getDecodedToken()?.unique_name[1] | titlecase}}
         </button>
         <mat-menu #menu="matMenu">
           <button mat-menu-item [routerLink]="['/profile']">

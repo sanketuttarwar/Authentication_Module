@@ -20,15 +20,15 @@ export class LoginComponent implements OnInit {
     if (this.loggedIn()) {
       let roleId = this.authService.getRoleId();
       switch(roleId) {
-        case '1' : {
+        case 1 : {
           this.router.navigate(['/admin-dashboard']);
           break;
         }
-        case '2' : {
+        case 2 : {
           this.router.navigate(['']);
           break;
         }
-        case '3' : {
+        case 3 : {
           this.router.navigate(['/dashboard']);
           break;
         }

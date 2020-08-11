@@ -24,7 +24,7 @@ export class AuthService {
           localStorage.setItem('token', user.token);
           this.decodedToken = this.jwtHelper.decodeToken(user.token);
           this.roleId = parseInt(this.decodedToken.unique_name[3]) ;
-          console.log(this.decodedToken);
+          console.log(this.decodedToken.unique_name);
         }
       })
     );
@@ -47,7 +47,11 @@ export class AuthService {
   getRoleId() {
     if(this.loggedIn()) {
       this.decodedToken = this.jwtHelper.decodeToken(localStorage.getItem('token'));
-      return this.decodedToken.unique_name[3];
+      if(this.decodedToken.unique_name[2] == '') {
+        //hereeeeeeeeee
+        return 3;
+      }
+      return this.decodedToken.unique_name[2];
     }
     return 0;
   }

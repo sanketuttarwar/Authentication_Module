@@ -27,15 +27,15 @@ export class RegisterComponent implements OnInit {
     if (this.authService.loggedIn()) {
       let roleId = this.authService.getRoleId();
       switch(roleId) {
-        case '1' : {
+        case 1 : {
           this.router.navigate(['/admin-dashboard']);
           break;
         }
-        case '2' : {
+        case 2 : {
           this.router.navigate(['']);
           break;
         }
-        case '3' : {
+        case 3 : {
           this.router.navigate(['/dashboard']);
           break;
         }
@@ -107,7 +107,7 @@ export class RegisterComponent implements OnInit {
         'signupMiddleName'
       ).value;
       this.signupModel.lastName = this.signupForm.get('signupLastName').value;
-      this.signupModel.gender = this.signupForm.get('signupGender').value;
+      this.signupModel.gender = this.signupForm.get('signupGender').value == 'Male' ? 'm' : 'f';
       this.signupModel.phone = this.signupForm.get('signupMobile').value;
       this.signupModel.emailid = this.signupForm.get('signupEmail').value;
       this.signupModel.password = this.signupForm.get(
