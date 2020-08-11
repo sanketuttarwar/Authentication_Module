@@ -18,7 +18,24 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     if (this.loggedIn()) {
-      this.router.navigate(['/dashboard']);
+      let roleId = this.authService.getRoleId();
+      switch(roleId) {
+        case '1' : {
+          this.router.navigate(['/admin-dashboard']);
+          break;
+        }
+        case '2' : {
+          this.router.navigate(['']);
+          break;
+        }
+        case '3' : {
+          this.router.navigate(['/dashboard']);
+          break;
+        }
+        default : {
+          break;
+        }
+      }
     }
     this.loginForm = new FormGroup({
       loginEmail: new FormControl(null, [
@@ -51,7 +68,25 @@ export class LoginComponent implements OnInit {
         () => {
           this.loginLoading = false;
           this.loginForm.reset();
-          this.router.navigate(['/dashboard']);
+
+          let roleId = this.authService.getRoleId();
+          switch(roleId) {
+            case 1 : {
+              this.router.navigate(['/admin-dashboard']);
+              break;
+            }
+            case 2 : {
+              this.router.navigate(['']);
+              break;
+            }
+            case 3 : {
+              this.router.navigate(['/dashboard']);
+              break;
+            }
+            default : {
+              break;
+            }
+          }
         }
       );
     }
