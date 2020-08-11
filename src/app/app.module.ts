@@ -29,11 +29,6 @@ import { LoginComponent } from './auth/login/login.component';
 import { CardsComponent } from './dashboard/cards/cards.component';
 import { DetailsComponent } from './dashboard/serviceform/details.component';
 import { HeaderComponent } from "../app/header/header.component";
-import { RequestListComponent } from './admin-dashboard/request-list.component';
-import { SummaryShortenPipe } from '../app/admin-dashboard/summaryShorten.pipe';
-import { RequestDetailsComponent } from './admin-dashboard/request-details/request-details.component';
-import { FooterComponent } from './footer/footer.component';
-
 
 @NgModule({
   declarations: [
@@ -46,10 +41,6 @@ import { FooterComponent } from './footer/footer.component';
     CardsComponent,
     DetailsComponent,
     HeaderComponent,
-    RequestListComponent,
-    SummaryShortenPipe,
-    RequestDetailsComponent,
-    FooterComponent
   ],
   imports: [
     BrowserModule,

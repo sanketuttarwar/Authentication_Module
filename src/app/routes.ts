@@ -7,16 +7,14 @@ import { RegisterComponent } from './auth/register/register.component';
 import { UserDetailsResolver } from './_resolvers/user-details.resolver';
 import { DetailsComponent } from './dashboard/serviceform/details.component';
 import { ServiceRequestResolver } from './_resolvers/service-request.resolver';
-import { RequestListComponent } from './admin-dashboard/request-list.component';
-import { RequestDetailsComponent } from './admin-dashboard/request-details/request-details.component';
 
 export const appRoutes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   {
     path: '',
-    // runGuardsAndResolvers: 'always',
-    // canActivate: [AuthGuard],
+    runGuardsAndResolvers: 'always',
+    canActivate: [AuthGuard],
     children: [
       {
         path: 'profile',
@@ -29,8 +27,6 @@ export const appRoutes: Routes = [
         resolve: { requests: ServiceRequestResolver },
       },
       { path: 'create-request', component: DetailsComponent },
-      {path: 'admin-dashboard', component: RequestListComponent},
-      {path: 'request-detail/:id', component: RequestDetailsComponent}
     ],
   },
   { path: '**', redirectTo: '', pathMatch: 'full' },
