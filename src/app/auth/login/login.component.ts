@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
         }
       );
     }
-    this.router.navigate(['/admin-dashboard']);
+    this.router.navigate(['/dashboard']);
   }
 
   loggedIn() {
