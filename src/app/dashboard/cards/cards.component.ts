@@ -30,14 +30,15 @@ export class CardsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.loading = true;
     this.apiSubscription = this.http.fetchFromAPI().subscribe((requests) => {
+      // console.log(requests);
       this.completed = requests.filter((request) => {
-        return request.statusId === 0;
+        return request.requestStatusId === 0;
       }).length;
       this.pending = requests.filter((request) => {
-        return request.statusId === 1;
+        return request.requestStatusId === 1;
       }).length;
       this.closed = requests.filter((request) => {
-        return request.status.status1 === 2;
+        return request.requestStatusId === 2;
       }).length;
       this.loading = false;
     });

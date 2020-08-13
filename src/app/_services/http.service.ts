@@ -31,10 +31,6 @@ export class HttpService implements OnDestroy {
           if (responseData.hasOwnProperty(key)) {
             postArray.push({
               ...responseData[key],
-              departmentName: responseData[key].department.name,
-              categoryName: responseData[key].category.name,
-              subCategory: responseData[key].subCategory.name,
-              statusType: responseData[key].status.status1,
             });
           }
         }

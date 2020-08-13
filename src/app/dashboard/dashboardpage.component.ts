@@ -41,11 +41,11 @@ export class DashboardpageComponent implements OnInit, OnDestroy {
 
   dataSource: any;
   columnsToDisplay = [
-    'id',
+    'requestId',
     'title',
-    'departmentName',
-    'categoryName',
-    'subCategory',
+    'requestDepartment',
+    'requestCategory',
+    'requestSubCategory',
   ];
   expandedElement: ServiceRequest | null;
   loading: boolean;
