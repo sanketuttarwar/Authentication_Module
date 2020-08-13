@@ -17,13 +17,13 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   login(model: any) {
-    return this.http.post(this.baseUrl + 'api/employee/authenticate', model).pipe(
+    return this.http.post(this.baseUrl + 'employee/authenticate', model).pipe(
       map((response: any) => {
         const user = response;
         if (user) {
           localStorage.setItem('token', user.token);
           this.decodedToken = this.jwtHelper.decodeToken(user.token);
-          this.roleId = parseInt(this.decodedToken.unique_name[3]) ;
+          this.roleId = parseInt(this.decodedToken.unique_name[3]);
           console.log(this.decodedToken.unique_name);
         }
       })
@@ -31,7 +31,7 @@ export class AuthService {
   }
 
   register(model: any) {
-    return this.http.post(this.baseUrl + 'api/employee/register', model);
+    return this.http.post(this.baseUrl + 'employee/register', model);
   }
 
   loggedIn() {
@@ -40,14 +40,18 @@ export class AuthService {
   }
 
   getDecodedToken() {
-    this.decodedToken = this.jwtHelper.decodeToken(localStorage.getItem('token'));
+    this.decodedToken = this.jwtHelper.decodeToken(
+      localStorage.getItem('token')
+    );
     return this.decodedToken;
   }
 
   getRoleId() {
-    if(this.loggedIn()) {
-      this.decodedToken = this.jwtHelper.decodeToken(localStorage.getItem('token'));
-      if(this.decodedToken.unique_name[2] == '') {
+    if (this.loggedIn()) {
+      this.decodedToken = this.jwtHelper.decodeToken(
+        localStorage.getItem('token')
+      );
+      if (this.decodedToken.unique_name[2] == '') {
         //hereeeeeeeeee
         return 3;
       }

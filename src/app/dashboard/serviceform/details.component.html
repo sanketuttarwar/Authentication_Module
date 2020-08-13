@@ -44,7 +44,6 @@
             (change)="onSelectCategory()"
             required
           >
-            <option disabled selected> Choose one </option>
             <option *ngFor="let item of categories" [ngValue]="item"
               >{{ item.name }}
             </option>
@@ -62,7 +61,6 @@
             id="subCategory"
             class="form-control"
             ngModel
-            (input)="onSelectSubCategory()"
             [(ngModel)]="subCat"
           >
             <option *ngFor="let item of subcategories" [ngValue]="item"

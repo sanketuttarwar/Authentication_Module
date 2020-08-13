@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Request } from '../../_models/request.model';
 import { HttpService } from '../../_services/http.service';
+import { AuthService } from 'src/app/_services/auth.service';
 
 @Component({
   selector: 'app-details',
@@ -20,7 +21,11 @@ export class DetailsComponent implements OnInit {
   cat;
   subCat;
   requestCreated = false;
-  constructor(private HttpService: HttpService) {}
+  userId: number;
+  constructor(
+    private HttpService: HttpService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit() {
     this.HttpService.getDepartments().subscribe((departments) => {
@@ -31,6 +36,9 @@ export class DetailsComponent implements OnInit {
       this.categoriesArray = categories;
       // console.log(categories);
     });
+
+    this.userId = this.authService.getDecodedToken().unique_name[0];
+    console.log(this.userId);
   }
 
   onSubmit(form: NgForm) {
@@ -48,7 +56,7 @@ export class DetailsComponent implements OnInit {
       value.subCategory.id,
       1,
       value.department.id,
-      2,
+      this.userId,
       2,
       1,
       value.title,
@@ -66,6 +74,7 @@ export class DetailsComponent implements OnInit {
     this.categories = this.categoriesArray.filter((cat) => {
       return cat.departmentId === this.depart.id && cat.parentId === null;
     });
+    this.setSubCategory();
   }
 
   onSelectCategory() {
@@ -73,8 +82,10 @@ export class DetailsComponent implements OnInit {
       return cat.parentId === this.cat.id;
     });
   }
-  onSelectSubCategory() {
-    // this.reqCat = event.target.value;
+  setSubCategory() {
+    this.subcategories = this.categoriesArray.filter((cat) => {
+      return cat.parentId === this.cat.id;
+    });
   }
 
   onCancel() {}
