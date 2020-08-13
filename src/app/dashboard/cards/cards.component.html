@@ -3,23 +3,23 @@
   <mat-card
     class="example-card"
     id="completed"
-    (click)="onSelect('completed')"
+    (click)="onSelect(1)"
     matRipple
   >
     <mat-card-content>
-      <h1 class="mat-display-3">{{ completed }}</h1>
+      <h1 class="mat-display-3">{{ open }}</h1>
     </mat-card-content>
-    <mat-card-title>Completed Requests </mat-card-title>
+    <mat-card-title>Open Requests </mat-card-title>
   </mat-card>
 
   <mat-card
     class="example-card"
     id="pending"
-    (click)="onSelect('pending')"
+    (click)="onSelect(2)"
     matRipple
   >
     <mat-card-content>
-      <h1 class="mat-display-3">{{ pending }}</h1>
+      <h1 class="mat-display-3">{{ inProgress }}</h1>
     </mat-card-content>
     <mat-card-title>Pending Requests</mat-card-title>
   </mat-card>
@@ -27,11 +27,11 @@
   <mat-card
     class="example-card"
     id="closed"
-    (click)="onSelect('closed')"
+    (click)="onSelect(3)"
     matRipple
   >
     <mat-card-content>
-      <h1 class="mat-display-3">{{ closed }}</h1>
+      <h1 class="mat-display-3">{{ close }}</h1>
     </mat-card-content>
     <mat-card-title>Closed Requests</mat-card-title>
   </mat-card>

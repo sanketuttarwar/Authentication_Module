@@ -51,10 +51,12 @@ export class AuthService {
       this.decodedToken = this.jwtHelper.decodeToken(
         localStorage.getItem('token')
       );
-      if (this.decodedToken.unique_name[2] == '') {
+      if (this.decodedToken.unique_name[2] === '') {
         //hereeeeeeeeee
         return 3;
       }
+
+      // return roleId from decoded token;
       return this.decodedToken.unique_name[2];
     }
     return 0;

@@ -74,7 +74,7 @@ export class DetailsComponent implements OnInit {
     this.categories = this.categoriesArray.filter((cat) => {
       return cat.departmentId === this.depart.id && cat.parentId === null;
     });
-    this.setSubCategory();
+    // this.setSubCategory();
   }
 
   onSelectCategory() {

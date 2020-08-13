@@ -17,12 +17,12 @@ import { Subscription } from 'rxjs';
 })
 export class CardsComponent implements OnInit, OnDestroy {
   constructor(private http: HttpService) {}
-  @Output() cardSelected = new EventEmitter<string>();
+  @Output() cardSelected = new EventEmitter<number>();
   // @Input() req : Request[];
 
-  completed: number;
-  closed: number;
-  pending: number;
+  open: number;
+  close: number;
+  inProgress: number;
 
   loading: boolean;
   apiSubscription: Subscription;
@@ -30,21 +30,21 @@ export class CardsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.loading = true;
     this.apiSubscription = this.http.fetchFromAPI().subscribe((requests) => {
-      // console.log(requests);
-      this.completed = requests.filter((request) => {
-        return request.requestStatusId === 0;
-      }).length;
-      this.pending = requests.filter((request) => {
+      console.log(requests);
+      this.open = requests.filter((request) => {
         return request.requestStatusId === 1;
       }).length;
-      this.closed = requests.filter((request) => {
+      this.close = requests.filter((request) => {
+        return request.requestStatusId === 3;
+      }).length;
+      this.inProgress = requests.filter((request) => {
         return request.requestStatusId === 2;
       }).length;
       this.loading = false;
     });
   }
 
-  onSelect(type: string) {
+  onSelect(type: number) {
     //emit the type of the card by which to filter the requests list
     this.cardSelected.emit(type);
   }
