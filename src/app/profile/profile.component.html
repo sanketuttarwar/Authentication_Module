@@ -10,11 +10,13 @@
       </div>
     </div>
     <div class="col-md-8">
-      <h4>
-        {{ user?.firstName + " " + user?.middleName + " " + user?.lastName }}
-      </h4>
+      <strong>
+        <h1>
+          {{ user?.firstName + " " + user?.middleName + " " + user?.lastName }}
+        </h1>
+      </strong>
       <strong>Gender:</strong>
-      <p>{{ user?.gender }}</p>
+      <p>{{user?.gender=='m'?'Male':'Female'}}</p>
       <strong>Email: </strong>
       <p>{{ user?.email }}</p>
       <strong>Mobile: </strong>

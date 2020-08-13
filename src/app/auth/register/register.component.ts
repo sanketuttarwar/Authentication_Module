@@ -24,6 +24,27 @@ export class RegisterComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    if (this.authService.loggedIn()) {
+      let roleId = this.authService.getRoleId();
+      switch(roleId) {
+        case 1 : {
+          this.router.navigate(['/admin-dashboard']);
+          break;
+        }
+        case 2 : {
+          this.router.navigate(['']);
+          break;
+        }
+        case 3 : {
+          this.router.navigate(['/dashboard']);
+          break;
+        }
+        default : {
+          break;
+        }
+      }
+    }
+
     this.signupForm = new FormGroup({
       signupFirstName: new FormControl(null, [
         Validators.required,
@@ -86,9 +107,9 @@ export class RegisterComponent implements OnInit {
         'signupMiddleName'
       ).value;
       this.signupModel.lastName = this.signupForm.get('signupLastName').value;
-      this.signupModel.gender = this.signupForm.get('signupGender').value;
+      this.signupModel.gender = this.signupForm.get('signupGender').value == 'Male' ? 'm' : 'f';
       this.signupModel.phone = this.signupForm.get('signupMobile').value;
-      this.signupModel.email = this.signupForm.get('signupEmail').value;
+      this.signupModel.emailid = this.signupForm.get('signupEmail').value;
       this.signupModel.password = this.signupForm.get(
         'passwords.signupPassword'
       ).value;

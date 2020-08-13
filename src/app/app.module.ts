@@ -21,7 +21,6 @@ import { ServiceRequestResolver } from './_resolvers/service-request.resolver';
 
 //components
 import { AppComponent } from './app.component';
-import { NavComponent } from './nav/nav.component';
 import { DashboardpageComponent } from './dashboard/dashboardpage.component';
 import { ProfileComponent } from './profile/profile.component';
 import { RegisterComponent } from './auth/register/register.component';
@@ -38,7 +37,6 @@ import { FooterComponent } from './footer/footer.component';
 @NgModule({
   declarations: [
     AppComponent,
-    NavComponent,
     DashboardpageComponent,
     ProfileComponent,
     RegisterComponent,

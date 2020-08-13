@@ -1,7 +1,7 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #drawer class="sidenav" [mode]="'over'">
     <mat-toolbar color="primary">Menu</mat-toolbar>
-    <mat-nav-list>
+    <mat-nav-list *ngIf="authService.getRoleId() == 3">
       <mat-list-item>
         <mat-icon matListIcon>account_circle</mat-icon>
         <a
@@ -22,7 +22,19 @@
           >Service Requests</a
         >
       </mat-list-item>
-    </mat-nav-list>
+      </mat-nav-list>
+      <mat-nav-list *ngIf="authService.getRoleId() == 1">
+        <mat-list-item>
+          <mat-icon matListIcon>account_circle</mat-icon>
+          <a
+            matLine
+            [routerLink]="['/admin-dashboard']"
+            routerLinkActive="router-link-active"
+            (click)="drawer.close()"
+            >Dashboard</a
+          >
+        </mat-list-item>
+      </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
     <!-- Toolbar Section -->
@@ -53,12 +65,8 @@
           [matMenuTriggerFor]="menu"
           color="primary"
         >
-          <img
-            src="../../assets/user_logo.png"
-            alt="user-profile"
-            class="profile-img"
-          />
-          User Name
+        <mat-icon>person_outline</mat-icon>
+        {{' '+authService.getDecodedToken()?.unique_name[1] | titlecase}}
         </button>
         <mat-menu #menu="matMenu">
           <button mat-menu-item [routerLink]="['/profile']">

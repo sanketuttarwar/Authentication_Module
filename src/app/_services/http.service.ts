@@ -17,14 +17,14 @@ export class HttpService implements OnDestroy {
   }
   createAndStoreRequest(formData: Request) {
     this.postSubscription = this.http
-      .post(this.baseUrl + '/requests', formData)
+      .post(this.baseUrl + 'requests', formData)
       .subscribe((data) => {
         console.log(data);
       });
   }
 
   fetchFromAPI() {
-    return this.http.get(this.baseUrl + '/requests').pipe(
+    return this.http.get(this.baseUrl + 'requests').pipe(
       map((responseData) => {
         const postArray = [];
         for (const key in responseData) {
@@ -44,11 +44,11 @@ export class HttpService implements OnDestroy {
   }
 
   fetchRequestById(id: number) {
-    return this.http.get(this.baseUrl + '/requests/' + id);
+    return this.http.get(this.baseUrl + 'requests/' + id);
   }
 
   getDepartments() {
-    return this.http.get(this.baseUrl + '/departments').pipe(
+    return this.http.get(this.baseUrl + 'departments').pipe(
       map((resposeData) => {
         const departmentsArray = [];
         for (const key in resposeData) {
@@ -62,7 +62,7 @@ export class HttpService implements OnDestroy {
   }
 
   getCategories() {
-    return this.http.get(this.baseUrl + '/categories').pipe(
+    return this.http.get(this.baseUrl + 'categories').pipe(
       map((responseData) => {
         const categoriesArray = [];
         for (const key in responseData) {
