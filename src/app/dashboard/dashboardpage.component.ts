@@ -56,8 +56,24 @@ export class DashboardpageComponent implements OnInit, OnDestroy {
     this.dataSource.filter = value.trim().toLowerCase();
   }
 
-  filterFromCard(type: string) {
-    this.dataSource.filter = type.trim().toLowerCase();
+  filterFromCard(type: number) {
+    let serviceStatus: string;
+    console.log(type);
+    switch (type) {
+      case 1: {
+        serviceStatus = 'open';
+        break;
+      }
+      case 2: {
+        serviceStatus = 'inprogress';
+        break;
+      }
+      case 3: {
+        serviceStatus = 'close';
+        break;
+      }
+    }
+    this.dataSource.filter = serviceStatus.trim().toLowerCase();
   }
 
   onClearFilter() {
@@ -66,11 +82,13 @@ export class DashboardpageComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.loading = true;
-    this.apiSubscription = this.httpService.fetchFromAPI().subscribe((requests) => {
-      this.dataSource = new MatTableDataSource(requests);
-      this.loading = false;
-      this.dataSource.paginator = this.paginator;
-    });
+    this.apiSubscription = this.httpService
+      .fetchFromAPI()
+      .subscribe((requests) => {
+        this.dataSource = new MatTableDataSource(requests);
+        this.loading = false;
+        this.dataSource.paginator = this.paginator;
+      });
   }
 
   ngOnDestroy() {

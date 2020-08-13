@@ -1,7 +1,7 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #drawer class="sidenav" [mode]="'over'">
     <mat-toolbar color="primary">Menu</mat-toolbar>
-    <mat-nav-list *ngIf="authService.getRoleId() == 3">
+    <mat-nav-list *ngIf="authService.getRoleId() === '3'">
       <mat-list-item>
         <mat-icon matListIcon>account_circle</mat-icon>
         <a
@@ -23,7 +23,7 @@
         >
       </mat-list-item>
       </mat-nav-list>
-      <mat-nav-list *ngIf="authService.getRoleId() == 1">
+      <mat-nav-list *ngIf="authService.getRoleId() === 1">
         <mat-list-item>
           <mat-icon matListIcon>account_circle</mat-icon>
           <a

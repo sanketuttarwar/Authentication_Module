@@ -19,8 +19,8 @@ export const appRoutes: Routes = [
 
   {
     path: '',
-    runGuardsAndResolvers: 'always',
-    canActivate: [UserGuard],
+    // runGuardsAndResolvers: 'always',
+    // canActivate: [UserGuard],
     children: [
       {
         path: 'dashboard',
