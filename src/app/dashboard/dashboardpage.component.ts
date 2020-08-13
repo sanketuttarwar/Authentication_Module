@@ -10,6 +10,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { HttpService } from '../_services/http.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { Subscription } from 'rxjs';
+import { map, tap, filter } from 'rxjs/operators';
+import { AuthService } from '../_services/auth.service';
 
 export interface ServiceRequest {
   serviceNo: number;
@@ -38,6 +40,7 @@ export interface ServiceRequest {
 export class DashboardpageComponent implements OnInit, OnDestroy {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   apiSubscription: Subscription;
+  userId : number;
 
   dataSource: any;
   columnsToDisplay = [
@@ -50,7 +53,10 @@ export class DashboardpageComponent implements OnInit, OnDestroy {
   expandedElement: ServiceRequest | null;
   loading: boolean;
 
-  constructor(private httpService: HttpService) {}
+  constructor(
+    private httpService: HttpService,
+    private authService: AuthService
+  ) {}
 
   onFilter(value: string) {
     this.dataSource.filter = value.trim().toLowerCase();
@@ -82,10 +88,15 @@ export class DashboardpageComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.loading = true;
+    this.userId = this.authService.getDecodedToken().unique_name[0];
     this.apiSubscription = this.httpService
       .fetchFromAPI()
       .subscribe((requests) => {
-        this.dataSource = new MatTableDataSource(requests);
+        console.log(this.authService.getDecodedToken());
+        const filteredRequests = requests.filter(
+          (req) => req.createdEmpId === +this.userId
+        );
+        this.dataSource = new MatTableDataSource(filteredRequests);
         this.loading = false;
         this.dataSource.paginator = this.paginator;
       });
