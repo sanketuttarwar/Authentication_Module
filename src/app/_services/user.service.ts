@@ -13,6 +13,6 @@ export class UserService {
   constructor(private http: HttpClient) {}
 
   getUserDetails(): Observable<User> {
-    return this.http.get<User>(this.baseUrl + 'api/employee/getProfile');
+    return this.http.get<User>(this.baseUrl + 'employee/getProfile');
   }
 }
