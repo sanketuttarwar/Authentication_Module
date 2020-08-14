@@ -44,7 +44,7 @@ export class RequestDetailsComponent implements OnInit, OnDestroy {
 
   getEmployeeList(){
     this.sub2 = this.requestDetailService.getEmployees().subscribe(Response => {
-      this.employeeList = Response.filter(emp => emp.department === this.request.requestDepartment);
+      this.employeeList = Response;
     });
   }
 
