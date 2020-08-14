@@ -23,7 +23,7 @@ export class AuthService {
         if (user) {
           localStorage.setItem('token', user.token);
           this.decodedToken = this.jwtHelper.decodeToken(user.token);
-          this.roleId = parseInt(this.decodedToken.unique_name[3]);
+          this.roleId = parseInt(this.decodedToken.unique_name[2]);
           console.log(this.decodedToken.unique_name);
         }
       })
@@ -55,10 +55,20 @@ export class AuthService {
         //hereeeeeeeeee
         return 3;
       }
-
-      // return roleId from decoded token;
-      return this.decodedToken.unique_name[2];
+      return parseInt(this.decodedToken.unique_name[2]);
     }
     return 0;
   }
+
+ getDepartmentId(){
+  if (this.loggedIn()) {
+    this.decodedToken = this.jwtHelper.decodeToken(
+      localStorage.getItem('token')
+    );
+    console.log(this.decodedToken.unique_name[3]);
+    return parseInt(this.decodedToken.unique_name[3]);
+  }
+  return 0;
+ }
 }
+
