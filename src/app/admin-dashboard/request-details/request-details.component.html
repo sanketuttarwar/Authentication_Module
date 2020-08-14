@@ -1,135 +1,139 @@
-<div class="container" *ngIf="request">
-  <div class="row justify-content-center">
-    <div class="col-md-6 formStyle shadow mb-5" >
-        <form #detailForm = "ngForm" (ngSubmit)="onDetailSubmit(detailForm)">
+<div *ngIf="request">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6 formStyle shadow mb-5" >
+          <form #detailForm = "ngForm" (ngSubmit)="onDetailSubmit(detailForm)">
+              <div class="row" style="margin-bottom: 1rem;">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="ID">Request ID:</label>
+                    <input type="text"
+                    class="form-control"
+                    id="ID"
+                    value="{{request.requestId}}"
+                     readonly>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="department">Department:</label>
+                    <input
+                     type="text"
+                     class="form-control"
+                     id="department"
+                     value="{{request.requestDepartment}}"
+                     readonly>
+                  </div>
+                </div>
+            </div>
+
             <div class="row" style="margin-bottom: 1rem;">
               <div class="col-md-6">
                 <div class="form-group">
-                  <label for="ID">Request ID:</label>
-                  <input type="text"
+                  <label for="requestCategory">Request Category:</label>
+                  <input
+                  type="text"
                   class="form-control"
-                  id="ID"
-                  value="{{request.requestId}}"
-                   readonly>
+                  id="requestCategory"
+                  value="{{request.requestCategory}}"
+                  readonly>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
-                  <label for="department">Department:</label>
+                  <label for="requestSubCategory">Request Sub Category:</label>
                   <input
-                   type="text"
+                  type="text"
                    class="form-control"
-                   id="department"
-                   value="{{request.requestDepartment}}"
+                   id="requestSubCategory"
+                   value="{{request.requestSubCategory}}"
                    readonly>
                 </div>
               </div>
           </div>
 
-          <div class="row" style="margin-bottom: 1rem;">
-            <div class="col-md-6">
+          <div class="row justify-content-center" style="margin-bottom: 1rem;">
+            <div class="col-12">
               <div class="form-group">
-                <label for="requestCategory">Request Category:</label>
-                <input
-                type="text"
+                <label for="requestSummary">Summary:</label>
+                <textarea
                 class="form-control"
-                id="requestCategory"
-                value="{{request.requestCategory}}"
-                readonly>
+                id="requestSummary"
+                cols="30"
+                rows="4"
+                style="width: 100%;"
+               readonly
+                 >{{request.requestSummary}}</textarea>
+              </div>
+            </div>
+          </div>
+          <hr>
+
+          <div class="row" style="margin-bottom: 1rem;">
+            <div class="col-md-4">
+              <label>Select Status<span class="text-danger">*</span></label>
+                <div class="radio" *ngFor="let requestStatus of status">
+                  <label>
+                    <input type="radio"
+                    ngModel
+                    name="requestStatus"
+                    [value]="requestStatus"
+                    required> {{requestStatus}}
+                  </label>
+                </div>
+            </div>
+            <div class="col-md-8">
+              <legend class="col-form-label" required>Assign To<span class="text-danger">*</span></legend>
+                <select class="form-control"
+                ngModel
+                name="requestAssignTo"
+                #empSel="ngModel"
+                required>
+                  <option *ngFor="let emp of employeeList" value="{{emp.id}}">{{emp.id}} - {{emp.firstName}} {{emp.lastName}} [{{emp.emailId}}] </option>
+                </select>
+                <span class="help-block text-danger" *ngIf="!empSel.valid && empSel.touched"><p>Please Select Employee from the above list!!</p></span>
+            </div>
+          </div>
+
+          <div class="row" style="margin-bottom: 2rem;">
+            <div class="col-12">
+              <div class="form-group">
+                <label for="comment">Comment<span class="text-danger">*</span></label>
+                <textarea
+                class="form-control"
+                id="comment"
+                cols="30"
+                rows="4"
+                style="width: 100%;"
+                ngModel
+                name="requestComment"
+                placeholder="Type a Comment here If any!"
+                required></textarea>
+              </div>
+            </div>
+          </div>
+          <span class="help-block text-danger" *ngIf="!detailForm.valid">
+            <p>Please Select Mandatory Fields!!</p>
+            </span>
+          <hr>
+          <div class="row" >
+            <div class="col-md-6" >
+              <div class="form-group">
+                <button type="submit" class="btn btn-lg btn-block btn-success" [disabled]="!detailForm.valid">Save</button>
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
-                <label for="requestSubCategory">Request Sub Category:</label>
-                <input
-                type="text"
-                 class="form-control"
-                 id="requestSubCategory"
-                 value="{{request.requestSubCategory}}"
-                 readonly>
+                <button type="button" class="btn btn-block btn-lg btn-danger" (click)="onCancel()">Cancel</button>
               </div>
             </div>
-        </div>
 
-        <div class="row justify-content-center" style="margin-bottom: 1rem;">
-          <div class="col-12">
-            <div class="form-group">
-              <label for="requestSummary">Summary:</label>
-              <textarea
-              class="form-control"
-              id="requestSummary"
-              cols="30"
-              rows="4"
-              style="width: 100%;"
-             readonly
-               >{{request.requestSummary}}</textarea>
-            </div>
-          </div>
-        </div>
-        <hr>
-
-        <div class="row" style="margin-bottom: 1rem;">
-          <div class="col-md-4">
-            <label>Select Status<span class="text-danger">*</span></label>
-              <div class="radio" *ngFor="let requestStatus of status">
-                <label>
-                  <input type="radio"
-                  ngModel
-                  name="requestStatus"
-                  [value]="requestStatus"
-                  required> {{requestStatus}}
-                </label>
-              </div>
-          </div>
-          <div class="col-md-8">
-            <legend class="col-form-label" required>Assign To<span class="text-danger">*</span></legend>
-              <select class="form-control"
-              ngModel
-              name="requestAssignTo"
-              #empSel="ngModel"
-              required>
-                <option *ngFor="let emp of employeeList" value="{{emp.id}}">{{emp.id}} - {{emp.firstName}} {{emp.lastName}} [{{emp.emailId}}] </option>
-              </select>
-              <span class="help-block text-danger" *ngIf="!empSel.valid && empSel.touched"><p>Please Select Employee from the above list!!</p></span>
-          </div>
-        </div>
-
-        <div class="row" style="margin-bottom: 2rem;">
-          <div class="col-12">
-            <div class="form-group">
-              <label for="comment">Comment<span class="text-danger">*</span></label>
-              <textarea
-              class="form-control"
-              id="comment"
-              cols="30"
-              rows="4"
-              style="width: 100%;"
-              ngModel
-              name="requestComment"
-              placeholder="Type a Comment here If any!"
-              required></textarea>
-            </div>
-          </div>
-        </div>
-        <span class="help-block text-danger" *ngIf="!detailForm.valid">
-          <p>Please Select Mandatory Fields!!</p>
-          </span>
-        <hr>
-        <div class="row" >
-          <div class="col-md-6" >
-            <div class="form-group">
-              <button type="submit" class="btn btn-lg btn-block btn-success" [disabled]="!detailForm.valid">Save</button>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="form-group">
-              <button type="button" class="btn btn-block btn-lg btn-danger" (click)="onCancel()">Cancel</button>
-            </div>
           </div>
 
-        </div>
-
-        </form>
+          </form>
+      </div>
     </div>
   </div>
 </div>
+
+
