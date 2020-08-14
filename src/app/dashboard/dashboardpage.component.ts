@@ -93,9 +93,7 @@ export class DashboardpageComponent implements OnInit, OnDestroy {
       .fetchFromAPI()
       .subscribe((requests) => {
         console.log(this.authService.getDecodedToken());
-        const filteredRequests = requests.filter(
-          (req) => req.createdEmpId === +this.userId
-        );
+        const filteredRequests = requests;
         this.dataSource = new MatTableDataSource(filteredRequests);
         this.loading = false;
         this.dataSource.paginator = this.paginator;
