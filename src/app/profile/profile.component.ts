@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../_models/user';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../_services/user.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-profile',
@@ -13,7 +14,9 @@ export class ProfileComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router,
+    private location: Location
   ) {}
 
   ngOnInit() {
@@ -29,5 +32,8 @@ export class ProfileComponent implements OnInit {
       },
       (error) => {}
     );
+  }
+  onBack(){
+   this.location.back();
   }
 }
