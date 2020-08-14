@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import {map} from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,14 +15,18 @@ export class RequestDetailService{
   employees: EmployeeData [];
   requestUpdate: RequestDataStore;
   baseUrl = environment.apiUrl;
-  constructor(private requestListService: RequestListService, private http: HttpClient){}
+  departmentId: number;
+
+  constructor(private requestListService: RequestListService, private http: HttpClient, private authService: AuthService){
+    this.departmentId = authService.getDepartmentId();
+  }
   setEmployees(emp: EmployeeData []){
       this.employees =emp;
   }
 
 
   getEmployees(): Observable<EmployeeData []>{
-    return this.http.get<EmployeeData []>(this.baseUrl+'assignemployee/getallemployees').pipe(
+    return this.http.get<EmployeeData []>(this.baseUrl+'assignemployee/EmployeeByDept/'+this.departmentId).pipe(
       map(Response => {
         const emp: EmployeeData [] = [];
         for(const key in Response){
@@ -44,7 +49,7 @@ export class RequestDetailService{
 
   updateRequest(selectedRequestId: string, status: string, empId: number , comment: string){
 
-    this.requestUpdate = this.requestListService.requests.find(req => req.requestId === selectedRequestId);
+    this.requestUpdate = this.requestListService.requests.find(req =>  req.requestId == selectedRequestId);
     this.requestUpdate.requestStatus = status;
     this.requestUpdate.assignedEmpId = empId;
     const obj = {
@@ -63,6 +68,6 @@ export class RequestDetailService{
       title: this.requestUpdate.title,
       comment: comment
     }
-    this.http.put(this.baseUrl +'request/UpdateRequest/'+ selectedRequestId, obj).subscribe();
+    this.http.put(this.baseUrl +'assignrequest/UpdateRequest/'+ selectedRequestId, obj).subscribe();
   }
 }
