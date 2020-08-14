@@ -4,6 +4,7 @@ import { Subject, Observable } from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {map} from 'rxjs/operators';
 import { environment } from '../../environments/environment';
+import { AuthService } from './auth.service';
 
 
 @Injectable({
@@ -18,11 +19,14 @@ export class RequestListService{
   requests: RequestDataStore [];
   requestList: RequestDataStore [];
   baseUrl = environment.apiUrl;
+  departmentId: number;
 
-   constructor(private http: HttpClient){}
+   constructor(private http: HttpClient, private authService: AuthService){
+     this.departmentId = authService.getDepartmentId();
+   }
 
    getRequests(): Observable<RequestDataStore[]>{
-    return this.http.get<RequestDataStore[]>(this.baseUrl+'assignrequest/getallrequests').pipe(
+    return this.http.get<RequestDataStore[]>(this.baseUrl+'assignrequest/getallrequests/'+this.departmentId).pipe(
       map((response) => {
         const req: RequestDataStore[] = [];
         for(const key in response){
@@ -37,19 +41,22 @@ export class RequestListService{
      return this.requests.find(req => req.requestId === id);
    }
 
-   filterValues( filterDepartment: string,
+   filterValues(
+     //filterDepartment: string,
     filterCategory: string,
     filterSubCategory: string,
     filterStatus: string,
     filterType: string){
             this.filteredRequests = this.requests;
-              if(filterDepartment !== ''){
-                this.filteredRequests = this.filteredRequests.filter(req => req.requestDepartment === filterDepartment);
-              }else{
-                this.filteredRequests = this.requests;
-              }
+              // if(filterDepartment !== ''){
+              //   this.filteredRequests = this.filteredRequests.filter(req => req.requestDepartment === filterDepartment);
+              // }else{
+              //   this.filteredRequests = this.requests;
+              // }
               if(filterCategory !== ''){
                 this.filteredRequests = this.filteredRequests.filter(req => req.requestCategory === filterCategory);
+              }else{
+                this.filteredRequests = this.requests;
               }
               if(filterSubCategory !== ''){
                 this.filteredRequests = this.filteredRequests.filter(req => req.requestSubCategory === filterSubCategory);
