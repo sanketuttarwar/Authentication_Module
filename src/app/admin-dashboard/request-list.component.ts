@@ -62,7 +62,8 @@ export class RequestListComponent implements OnInit, OnDestroy {
   }
 
   onFilterSubmit(filterForm: NgForm){
-    this.requestListService.filterValues( filterForm.value.department,
+    this.requestListService.filterValues(
+      //filterForm.value.department,
       filterForm.value.category,
       filterForm.value.subCategory,
         filterForm.value.status,
@@ -90,3 +91,4 @@ export class RequestListComponent implements OnInit, OnDestroy {
       this.ngOnInit();
     }
 }
+
