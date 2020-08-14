@@ -10,6 +10,7 @@ import { environment } from '../../environments/environment';
 export class HttpService implements OnDestroy {
   constructor(private http: HttpClient) {}
   postSubscription: Subscription;
+  userId = 0;
 
   baseUrl = environment.apiUrl;
   ngOnDestroy(): void {
@@ -34,7 +35,10 @@ export class HttpService implements OnDestroy {
             });
           }
         }
-        return postArray;
+        const req = postArray.filter(
+          (req) => req.createdEmpId === +this.userId
+        );
+        return req;
       })
     );
   }
@@ -71,3 +75,4 @@ export class HttpService implements OnDestroy {
     );
   }
 }
+
