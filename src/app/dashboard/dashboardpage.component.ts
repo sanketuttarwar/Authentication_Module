@@ -89,7 +89,7 @@ export class DashboardpageComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.loading = true;
     this.userId = this.authService.getDecodedToken().unique_name[0];
-    this.http.userId = this.userId;
+    this.httpService.userId = this.userId;
     this.apiSubscription = this.httpService
       .fetchFromAPI()
       .subscribe((requests) => {
