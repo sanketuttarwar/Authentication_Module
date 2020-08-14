@@ -19,22 +19,23 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     if (this.loggedIn()) {
       let roleId = this.authService.getRoleId();
-      switch (roleId) {
-        case 1: {
+      console.log(roleId);
+      switch(roleId) {
+        case 1 :
           this.router.navigate(['/admin-dashboard']);
           break;
-        }
-        case 2: {
+
+        case 2 :
           this.router.navigate(['']);
           break;
-        }
-        case 3: {
+
+        case 3 :
           this.router.navigate(['/dashboard']);
           break;
-        }
-        default: {
+
+        default :
           break;
-        }
+
       }
     }
     this.loginForm = new FormGroup({
@@ -70,26 +71,26 @@ export class LoginComponent implements OnInit {
           this.loginForm.reset();
 
           let roleId = this.authService.getRoleId();
-          console.log(roleId);
-          switch (+roleId) {
-            case 1: {
+         console.log(roleId);
+
+          switch(roleId) {
+            case 1 :
               this.router.navigate(['/admin-dashboard']);
               console.log('Navigating to admin dasbboard');
               break;
-            }
-            case 2: {
+
+            case 2 :
               this.router.navigate(['']);
               break;
-            }
-            case 3: {
+
+            case 3 :
               this.router.navigate(['/dashboard']);
               console.log('Navigating to associate dashboard');
               break;
-            }
-            default: {
-              console.log('default case');
+
+            default :
               break;
-            }
+
           }
         }
       );
