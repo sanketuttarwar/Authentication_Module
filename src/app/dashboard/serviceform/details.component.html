@@ -111,13 +111,16 @@
             Save
           </button>
           |
-          <button class="btn btn-default"><a [routerLink]="['/dashboard']"> Cancel </a></button>
+          <button class="btn btn-default">
+            <a [routerLink]="['/dashboard']"> Cancel </a>
+          </button>
         </div>
       </div>
     </form>
   </div>
 
   <div *ngIf="requestCreated" class="alert alert-success" style="margin: 10px;">
-    Request created successfully.
+    Request created successfully. The request Id id
+    <strong>{{ requestId }}</strong>
   </div>
 </div>

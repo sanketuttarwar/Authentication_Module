@@ -14,6 +14,7 @@ export class DetailsComponent implements OnInit {
   categoriesArray = [];
   categories = [];
   subcategories = [];
+  requestId : number;
 
   deptHasValue: boolean = false;
   deptChanged = false;
@@ -45,6 +46,7 @@ export class DetailsComponent implements OnInit {
     const value = form.value;
 
     const reqId = Math.floor(Math.random() * 10000000);
+    this.requestId = reqId;
     this.depart = '';
     this.cat = '';
     this.subCat = '';
